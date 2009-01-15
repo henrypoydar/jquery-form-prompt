@@ -6,7 +6,7 @@
  * the prompt text is added to the DOM. This approach works better with AJAX-submitted forms.
  *
  * This script will become unnecessary once target browsers support HTML 5 and the 
- * placeholder attribute for form fields
+ * placeholder attribute for form fields.
  *
  * Usage
  *
