@@ -3,7 +3,8 @@
  *
  * Seemingly populate form inputs with text that disappears when the field is focussed.
  * Works by not actually modifying the form field at all, instead an overlay div with
- * the prompt text is added to the DOM. This approach works better with AJAX-submitted forms.
+ * the prompt text is added to the DOM. This approach works better than direct 
+ * form field modification with AJAX-submitted forms and components.
  *
  * This script will become unnecessary once target browsers support HTML 5 and the 
  * placeholder attribute for form fields.
