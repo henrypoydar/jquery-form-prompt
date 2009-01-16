@@ -1,5 +1,5 @@
 /*
- * jQuery Form Input Prompt Plugin 0.2.0
+ * jQuery Form Input Prompt Plugin 0.3.0
  *
  * Seemingly populate form inputs with text that disappears when the field is focussed.
  * Works by not actually modifying the form field at all, instead an overlay div with
@@ -66,15 +66,20 @@
       prompt.css("left", "0");
       prompt.css("z-index", "1000");
       
-      input.click(function() {
-        input.focus();
-        prompt.hide();
-      });
+      // Form field is clicked ...
+      input.click(function() { selectInput(); });
 
-      prompt.click(function() {
+      // Form field is tabbed into ...
+      input.keyup(function() { selectInput(); });
+      
+      // Prompt element is clicked
+      prompt.click(function() { selectInput(); });
+
+      function selectInput() {
         input.focus();
         prompt.hide();
-      });
+      }
+      
 
       input.blur(function() {
         if (input.val() == '') { prompt.show(); }
