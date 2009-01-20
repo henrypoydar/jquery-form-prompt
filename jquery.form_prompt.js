@@ -27,8 +27,10 @@
 
 (function($) {
 
-  $.fn.form_prompt = function(text, options) {
+  // Setup jQery object method based on the definion below.
+  $.fn.form_prompt = form_prompt;
 
+  function form_prompt(text, options) {
     var prompt_text = '';
 
     // If text is passed as a callback, evaluate it
