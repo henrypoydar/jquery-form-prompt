@@ -27,6 +27,8 @@
 
 (function($) {
 
+  var wrapper = $('<div style="position:relative;overflow:hidden;display:inline-block;" />');
+
   // Setup jQery object method based on the definion below.
   $.fn.form_prompt = form_prompt;
 
@@ -49,9 +51,9 @@
       var input = $(this);
 
       // This may need adjustment for MSIE ...
-      input.wrap("<div class='"
-        + wrapperClassName
-        + "' style='position:relative;overflow:hidden;display:inline-block;'></div>");
+      var priorClasses = wrapper.attr('class');
+      input.wrap(wrapper.addClass(wrapperClassName));
+      wrapper.attr('class', priorClasses);
 
       if (input.val() == '') {
         input.after("<div class='" + className + "'>" + prompt_text + "</div>");
