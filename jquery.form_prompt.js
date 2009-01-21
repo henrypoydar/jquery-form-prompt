@@ -68,20 +68,14 @@
       prompt.css("left", "0");
       prompt.css("z-index", "1000");
       
-      // Form field is clicked ...
-      input.click(function() { selectInput(); });
-
-      // Form field is tabbed into ...
-      input.keyup(function() { selectInput(); });
-      
-      // Prompt element is clicked
-      prompt.click(function() { selectInput(); });
-
-      function selectInput() {
+      var selectInput = function() {
         input.focus();
         prompt.hide();
       }
-      
+
+      input.click( selectInput); // Form field is clicked ...
+      input.keyup( selectInput); // Form field is tabbed into ...
+      prompt.click(selectInput); // Prompt element is clicked
 
       input.blur(function() {
         if (input.val() == '') { prompt.show(); }
