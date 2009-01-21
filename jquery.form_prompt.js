@@ -30,6 +30,8 @@
   $.fn.form_prompt = function(text, options) {
     
     var prompt_text = '';
+
+    options = options || {};
     
     // If text is passed as a callback, evaluate it
     if ($.isFunction(text)) { 
