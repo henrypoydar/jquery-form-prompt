@@ -48,6 +48,12 @@
     
     
       var input = $(this);
+      
+      // use native placeholder attribute in Safari
+      if ($.browser.safari) {
+        input.attr('placeholder', prompt_text);
+        return;
+      }
     
       // This may need adjustment for MSIE ...
       input.wrap("<div class='" 
