@@ -1,12 +1,12 @@
-/*
- * jQuery Form Input Prompt Plugin 0.4.0
+/**
+ * jQuery Form Input Prompt Plugin 0.5.0
  *
  * Seemingly populate form inputs with text that disappears when the field is focussed.
  * Works by not actually modifying the form field at all, instead an overlay div with
- * the prompt text is added to the DOM. This approach works better than direct 
+ * the prompt text is added to the DOM. This approach works better than direct
  * form field modification with AJAX-submitted forms and components.
  *
- * This script will become unnecessary once target browsers support HTML 5 and the 
+ * This script will become unnecessary once target browsers support HTML 5 and the
  * placeholder attribute for form fields.
  *
  * Usage
@@ -20,54 +20,58 @@
  *  });
  *
  * Copyright (c) Henry Poydar (henry@poydar.com)
- * Dual licensed under the MIT (http://www.opensource.org/licenses/mit-license.php) 
+ * Dual licensed under the MIT (http://www.opensource.org/licenses/mit-license.php)
  * and GPL (http://www.opensource.org/licenses/gpl-license.php) licenses.
  *
- */
- 
+**/
+
 (function($) {
 
-  $.fn.form_prompt = function(text, options) {
+  var wrapper = $('<div style="position:relative;overflow:hidden;display:inline-block;" />');
+
+  // Setup jQuery object method based on the definition below
+  $.fn.form_prompt = form_prompt;
+
+  function form_prompt(text, options) {
     
     var prompt_text = '';
-
     options = options || {};
     
     // If text is passed as a callback, evaluate it
-    if ($.isFunction(text)) { 
+    if ($.isFunction(text)) {
       prompt_text = text.call(this);
     } else {
       prompt_text = text;
     }
-    
+
     // Evaluate options
     var className = options.className || 'form-prompt-text';
     var wrapperClassName = options.wrapperClassName || 'form-prompt-wrapper';
-    
+
     return this.each(function() {
     
       var input = $(this);
       
-      // use native placeholder attribute in Safari
+      // Use native placeholder attribute in Safari
       if ($.browser.safari) {
         input.attr('placeholder', prompt_text);
         return;
       }
-    
+
       // This may need adjustment for MSIE ...
-      input.wrap("<div class='" 
-        + wrapperClassName 
-        + "' style='position:relative;overflow:hidden;display:inline-block;'></div>");
-      
+      var priorClasses = wrapper.attr('class');
+      input.wrap(wrapper.addClass(wrapperClassName));
+      wrapper.attr('class', priorClasses);
+
       if (input.val() == '') {
         input.after("<div class='" + className + "'>" + prompt_text + "</div>");
       } else {
         input.after("<div class='" + className + "'></div>");
       }
-      
+
       var wrapper = input.parent('.' + wrapperClassName);
       var prompt = wrapper.find('.' + className);
-     
+
       prompt.css("position", "absolute");
       prompt.css("top", "0");
       prompt.css("left", "0");
@@ -85,7 +89,7 @@
       input.blur(function() {
         if (input.val() == '') { prompt.show(); }
       });
-      
+
     });
   };
 
