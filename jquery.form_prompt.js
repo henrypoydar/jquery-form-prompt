@@ -53,8 +53,8 @@
       var input = $(this);
       var wrapper = $('<div style="position:relative;overflow:hidden;display:inline-block;" />');
       
-      // Use native placeholder attribute in Safari
-      if ($.browser.safari) {
+      // Use native placeholder attribute in WebKit
+      if ($.browser.webkit) {
         input.attr('placeholder', prompt_text);
         return;
       }
